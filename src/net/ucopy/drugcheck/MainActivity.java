@@ -35,8 +35,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private Button mBtnStartScan = null;
 	// 输入条码的et
 	private TextView mTvInpuCode = null;
-	// tips和infos Pager
-	private ViewPager pager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +52,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mBtnStartScan = (Button) findViewById(R.id.btn_main_scanStart);
 
 		mTvInpuCode = (TextView) findViewById(R.id.tv_main_codeInput);
-
-		pager = (ViewPager) findViewById(R.id.main_pager);
-		pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
 	}
 
@@ -120,53 +115,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			startActivityForResult(intent, INPUT_GREQUEST_CODE);
 		}
 
-	}
-
-	/**
-	 * info和tips fragment的FragmentPagerAdapter
-	 * 
-	 * @author yw
-	 * 
-	 */
-	private class MyPagerAdapter extends FragmentPagerAdapter {
-
-		Fragment listFragment;
-		Fragment gridFragment;
-
-		MyPagerAdapter(FragmentManager fm) {
-			super(fm);
-			listFragment = new TipsFragment();
-			gridFragment = new InfosFragment();
-		}
-
-		@Override
-		public int getCount() {
-			return 2;
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			switch (position) {
-			case 0:
-				return listFragment;
-			case 1:
-				return gridFragment;
-			default:
-				return null;
-			}
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			switch (position) {
-			case 0:
-				return getString(R.string.tips);
-			case 1:
-				return getString(R.string.infos);
-			default:
-				return null;
-			}
-		}
 	}
 
 }

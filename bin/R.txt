@@ -264,8 +264,10 @@ int id activity_chooser_view_content 0x7f060035
 int id always 0x7f06000b
 int id auto_focus 0x7f06001a
 int id beginning 0x7f060011
+int id btn_info_main_activity 0x7f060057
 int id btn_input_start 0x7f060054
 int id btn_main_scanStart 0x7f060056
+int id btn_tips_main_activity 0x7f060058
 int id checkbox 0x7f06003d
 int id collapseActionView 0x7f06000d
 int id decode 0x7f06001b
@@ -299,8 +301,6 @@ int id lcv_druginfo_state 0x7f060050
 int id listMode 0x7f060001
 int id list_item 0x7f060039
 int id lv_druginfo_infos 0x7f060051
-int id main_pager 0x7f060057
-int id main_pager_title_strip 0x7f060058
 int id menu_settings 0x7f060060
 int id middle 0x7f060012
 int id never 0x7f060009

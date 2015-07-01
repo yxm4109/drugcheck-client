@@ -1106,8 +1106,10 @@ containing a value of this type.
          */
         public static final int auto_focus=0x7f06001a;
         public static final int beginning=0x7f060011;
+        public static final int btn_info_main_activity=0x7f060057;
         public static final int btn_input_start=0x7f060054;
         public static final int btn_main_scanStart=0x7f060056;
+        public static final int btn_tips_main_activity=0x7f060058;
         public static final int checkbox=0x7f06003d;
         public static final int collapseActionView=0x7f06000d;
         public static final int decode=0x7f06001b;
@@ -1141,8 +1143,6 @@ containing a value of this type.
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060039;
         public static final int lv_druginfo_infos=0x7f060051;
-        public static final int main_pager=0x7f060057;
-        public static final int main_pager_title_strip=0x7f060058;
         public static final int menu_settings=0x7f060060;
         public static final int middle=0x7f060012;
         public static final int never=0x7f060009;
