@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffe1e0de"
+    android:orientation="vertical" >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mmtitle_bg_alpha"
+        android:gravity="center"
+        android:text="@string/drug_info"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <net.ucopy.drugcheck.component.LabelContentView
+        android:id="@+id/lcv_druginfo_ele_sup_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_druginfo_drugImg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gettingimg_jpg"
+        android:contentDescription="@string/drug_img" />
+    
+    <net.ucopy.drugcheck.component.LabelContentView
+        android:id="@+id/lcv_druginfo_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/lv_druginfo_infos"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
+    
+
+</LinearLayout>
