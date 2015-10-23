@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">火眼金睛</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="scan_text">将条码放入框内, 即可自动扫描</string>
+    <string name="back">返回</string>
+    <string name="drug_info">药品信息</string>
+    <string name="scan_QR_code">二维码扫描</string>
+    <string name="on_scan_bar_code">正在扫描</string>
+    <string name="tips">小提示</string>
+    <string name="infos">资讯</string>
+    <string name="semicolon">:</string>
+    <string name="ele_sup_code">电子监管码</string>
+    <string name="drug_img">drug img</string>
+    <string name="please_input_ele_sup_code">请输入电子监管码</string>
+    <string name="searching">正在搜索</string>
+    <string name="search">搜索</string>
+    <string name="title">标题</string>
+    <string name="scan_code">扫码</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新…</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <string name="time_error">时间有问题</string>
+
+</resources>
