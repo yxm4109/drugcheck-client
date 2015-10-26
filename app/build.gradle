@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 17
+    compileSdkVersion 22
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "net.ucopy.drugcheck"
-        minSdkVersion 11
-        targetSdkVersion 18
+        minSdkVersion 14
+        targetSdkVersion 22
 
         testApplicationId "net.ucopy.drugcheck.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -23,17 +23,18 @@ android {
 
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
-    //    compile files('libs/AMap_3DMap_V2.4.0.jar')
-    //    compile files('libs/Android_Location_V1.3.2.jar')
-    //    compile files('libs/json.jar')
-    //    compile files('libs/jsoup-1.8.2.jar')
-    //    compile files('libs/volley.jar')
-    //    compile files('libs/zxing.jar')
-    //
-    //    compile files('libs/Bmob_Push_V0.6beta_20150408.jar')
-    //    compile files('libs/BmobSDK_V3.4.4_0930.jar')
-    //    compile files('libs/okhttp-2.4.0.jar')
-    //    compile files('libs/okio-1.4.0.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:appcompat-v7:22.1.0'
+//    compile 'com.android.support:recyclerview-v7:22.1.0'
+//    compile 'com.android.support:cardview-v7:22.1.0'
+//    compile 'com.squareup.picasso:picasso:2.3.2'
+//    compile 'com.jakewharton:butterknife:6.1.0'
+//    compile 'com.snappydb:snappydb-lib:0.5.0'
+//    compile 'com.esotericsoftware.kryo:kryo:2.24.0'
+//    compile 'com.github.liuguangqiang.swipeback:library:0.3.0@aar'
+//
+//    compile 'com.orhanobut:logger:1.8'
+//    compile 'pl.tajchert:waitingdots:0.1.0'
+
     compile project(':zxinglib')
 }

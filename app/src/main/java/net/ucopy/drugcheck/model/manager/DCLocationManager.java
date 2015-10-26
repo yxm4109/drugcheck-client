@@ -1,4 +1,4 @@
-package net.ucopy.drugcheck.manager;
+package net.ucopy.drugcheck.model.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

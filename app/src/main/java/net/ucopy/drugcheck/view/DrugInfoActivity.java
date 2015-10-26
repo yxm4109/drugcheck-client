@@ -1,17 +1,9 @@
 package net.ucopy.drugcheck.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import net.ucopy.drugcheck.R;
-import net.ucopy.drugcheck.component.LabelContentView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +12,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
+import net.ucopy.drugcheck.R;
+import net.ucopy.drugcheck.component.LabelContentView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 @SuppressLint("InflateParams")
 public class DrugInfoActivity extends Activity {
@@ -81,19 +75,7 @@ public class DrugInfoActivity extends Activity {
 	}
 
 	private void setDrugImg() {
-		if (drugImgURL=="") {			
-			drugImgIV.setImageResource(R.drawable.nodrugimg_jpg);			
-			return;
-		}		
-		ImageRequest ir = new ImageRequest(drugImgURL, new Listener<Bitmap>() {
 
-			@Override
-			public void onResponse(Bitmap response) {
-				drugImgIV.setImageBitmap(response);
-			}
-		}, DRUG_IMG_WIDTH, DRUG_IMG_HEIGTH, Config.RGB_565, null);
-		RequestQueue mQueue = Volley.newRequestQueue(this);
-		mQueue.add(ir);
 	}
 
 	class DrugInfoAdapter extends BaseAdapter {

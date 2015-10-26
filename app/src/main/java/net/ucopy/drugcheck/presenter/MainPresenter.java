@@ -1,7 +1,7 @@
 package net.ucopy.drugcheck.presenter;
 
 import net.ucopy.drugcheck.entity.SearchAction;
-import net.ucopy.drugcheck.view.MainActivity;
+import net.ucopy.drugcheck.view.mainactivity.MainActivity;
 
 import java.util.List;
 

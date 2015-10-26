@@ -37,15 +37,9 @@
  
 package net.ucopy.drugcheck;
 
-import net.ucopy.drugcheck.manager.DCLocationManager;
-
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,11 +48,8 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpClientStack;
-import com.android.volley.toolbox.Volley;
+
+import net.ucopy.drugcheck.model.manager.DCLocationManager;
 
 import cn.bmob.v3.Bmob;
 
@@ -77,6 +68,10 @@ public class ApplicationController extends Application implements AMapLocationLi
         Bmob.initialize(this, "e8a02b540c61bf9a071e0a7969c34814");
         appInstance = this;
 		initLocation();
+
+		CrashHandler crashHandler =CrashHandler.getInstance();
+		crashHandler.init(this);
+
 	}
 
     public static ApplicationController getAppContext(){

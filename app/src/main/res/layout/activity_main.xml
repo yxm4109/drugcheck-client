@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffe1e0de"
@@ -8,18 +8,19 @@
     <TextView
         android:id="@+id/textview_title"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mmtitle_bg_alpha"
-        android:gravity="center"
+        android:layout_height="28sp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="3dp"
         android:text="@string/app_name"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="22sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="120dp"
 
-        android:background="#78909c"
+        android:background="@color/colorPrimary"
         android:gravity="center" >
 
         <TextView
@@ -38,40 +39,6 @@
             android:gravity="center" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_infos_tips_main"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_choose_background"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-
-
-        <Button
-            android:id="@+id/btn_info_main_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:gravity="center"
-            android:text="@string/infos" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="35dp"
-            android:background="#077785"
-             />
-
-        <Button
-            android:id="@+id/btn_tips_main_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="#00000000"
-            android:gravity="center"
-            android:text="@string/tips" />
-    </LinearLayout>
 
     <ListView
         android:id="@+id/lv_infos_main_activity"

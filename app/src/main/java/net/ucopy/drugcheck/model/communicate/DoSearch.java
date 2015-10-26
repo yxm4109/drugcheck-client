@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.ucopy.drugcheck.BuildConfig;
-import net.ucopy.drugcheck.manager.DCLocationManager;
+import net.ucopy.drugcheck.model.manager.DCLocationManager;
 import net.ucopy.drugcheck.view.DrugInfoActivity;
 import net.ucopy.drugcheck.entity.DrugInfo;
 import net.ucopy.drugcheck.tools.InputStreamUtils;
