@@ -1,21 +1,20 @@
 /**
-  //=======\\//=======\\
-  ||        ||         ||
-  ||        ||         ||
-  ||        ||         || //======   ||         /=====\     ||
-  ||        ||         || ||         ||        ||     ||    ||
-  ||        ||         || ||         ||        ||     ||    ||====\\
-  ||        ||         || ||         ||        ||     ||    ||    ||
-  ||        ||         || \\======   \\=====    \======\\   \\====//
-  ------------------------------------------------------------------
-                    
+ * //=======\\//=======\\
+ * ||        ||         ||
+ * ||        ||         ||
+ * ||        ||         || //======   ||         /=====\     ||
+ * ||        ||         || ||         ||        ||     ||    ||
+ * ||        ||         || ||         ||        ||     ||    ||====\\
+ * ||        ||         || ||         ||        ||     ||    ||    ||
+ * ||        ||         || \\======   \\=====    \======\\   \\====//
+ * ------------------------------------------------------------------
  */
 package net.ucopy.drugcheck.view.inputcode;
 
 import android.content.Intent;
+import android.database.AbstractCursor;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -32,76 +31,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/** 
+/**
  * @author yw     E-mail:yxm4109@foxmail.com 
  * @date 2015-5-24 下午3:04:40 
- * @version   1.0
+ * @version 1.0
  * 说  明： 
  */
-public class InputCodeActivity extends BaseActivity implements  IInputCodeActivity{
+public class InputCodeActivity extends BaseActivity implements IInputCodeActivity {
 
 
-    SearchView sv ;
-    ListView lv ;
-    Cursor cursor = null;
+    SearchView sv;
+    ListView lv;
+
+    Cursor cursor;
 
     SimpleCursorAdapter adapter;
 
-    IInputcodePresenter inputcodePresenter ;
+    IInputcodePresenter inputcodePresenter;
 
-	@Override
+    private static final String SV_BARCODE_CLO = "tb_name";
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         inputcodePresenter = new InputCodePresenter(this);
         inputcodePresenter.onCreate();
+        cursor = new MatrixCursor(new String[]{SV_BARCODE_CLO});
 
         sv = (SearchView) findViewById(R.id.sv_inputcode_searchview);
         sv.setIconifiedByDefault(false);
 
         sv.setSubmitButtonEnabled(true);
 
-        sv.setQueryHint("查询");
+        sv.setQueryHint(getResources().getString(R.string.please_input_ele_sup_code));
 
+        adapter = new SimpleCursorAdapter(InputCodeActivity.this,
+                R.layout.item_search_suggestion, cursor, new String[]{SV_BARCODE_CLO},
+                new int[]{R.id.tv_search_suggestion});
 
-        cursor = this.getTestCursor("");
+        sv.setSuggestionsAdapter(adapter);
 
-        adapter = new SimpleCursorAdapter(this,
-                R.layout.item_search_suggestion, cursor, new String[] { "tb_name" },
-                new int[] { R.id.tv_search_suggestion });
-
-
-
-//        sv.setSuggestionsAdapter(adapter);
-        MatrixCursor cursor2=new MatrixCursor(new String[] { "tb_name" });
-        cursor2.addRow(new ArrayList<Object>());
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextChange(String str) {
-//                getTestCursor(str);
-//                adapter = new SimpleCursorAdapter(InputCodeActivity.this,
-//                        R.layout.item_search_suggestion, cursor, new String[] { "tb_name" },
-//                        new int[] { R.id.tv_search_suggestion });
-//
-//                sv.setSuggestionsAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
                 return false;
             }
 
             @Override
             public boolean onQueryTextSubmit(String str) {
 
-              if (str.length()!=20){
-                  ViewUtil.toast(InputCodeActivity.this,"长度不正确");
-                  return false;
-              }else {
-                  Intent resultIntent = new Intent();
-                  Bundle bundle = new Bundle();
-                  bundle.putString("result", str);
-                  resultIntent.putExtras(bundle);
-                  InputCodeActivity.this.setResult(RESULT_OK, resultIntent);
-                  finish();
-              }
+                if (str.length() != 20) {
+                    ViewUtil.toast(InputCodeActivity.this, "长度不正确");
+                    return false;
+                } else {
+                    Intent resultIntent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", str);
+                    resultIntent.putExtras(bundle);
+                    InputCodeActivity.this.setResult(RESULT_OK, resultIntent);
+                    finish();
+                }
 
 
                 return true;
@@ -126,45 +120,17 @@ public class InputCodeActivity extends BaseActivity implements  IInputCodeActivi
 
     }
 
+
+    private Cursor getCursor(String str) {
+
+         return null;
+    }
+
     @Override
-    protected  void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
 
         inputcodePresenter.onDestroy();
-    }
-
-    //添加suggestion需要的数据
-    public Cursor getTestCursor(String str) {
-
-        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(
-                this.getFilesDir() + "/my.db3", null);
-
-
-        try {
-
-            String insertSql = "insert into tb_test values (null,?,?)";
-
-
-
-            String querySql = "select * from tb_test where tb_name like '"+str+"%'";
-
-            cursor = db.rawQuery(querySql, null);
-
-
-        } catch (Exception e) {
-
-            String sql = "create table tb_test (_id integer primary key autoincrement,tb_name varchar(20),tb_age integer)";
-
-            db.execSQL(sql);
-
-            String insertSql = "insert into tb_test values (null,?,?)";
-
-            String querySql = "select * from tb_test";
-
-            cursor = db.rawQuery(querySql, null);
-        }
-
-        return cursor;
     }
 
 
@@ -193,5 +159,62 @@ public class InputCodeActivity extends BaseActivity implements  IInputCodeActivi
     public List<String> getHistroys() {
         return null;
     }
+
+    public class SearchCursor extends AbstractCursor{
+        List<String> data = new ArrayList<>();
+
+        public void flushData(List<String> newData){
+            data.clear();
+            data.addAll(newData);
+        }
+
+
+        @Override
+        public int getCount() {
+            return data.size();
+        }
+
+        @Override
+        public String[] getColumnNames() {
+            return new String[0];
+        }
+
+        @Override
+        public String getString(int column) {
+            return data.get(mPos);
+        }
+
+        @Override
+        public short getShort(int column) {
+            return 0;
+        }
+
+        @Override
+        public int getInt(int column) {
+            return 0;
+        }
+
+        @Override
+        public long getLong(int column) {
+            return 0;
+        }
+
+        @Override
+        public float getFloat(int column) {
+            return 0;
+        }
+
+        @Override
+        public double getDouble(int column) {
+            return 0;
+        }
+
+        @Override
+        public boolean isNull(int column) {
+            return false;
+        }
+    }
+
+
 }
  

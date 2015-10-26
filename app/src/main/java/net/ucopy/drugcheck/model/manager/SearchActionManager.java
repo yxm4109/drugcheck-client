@@ -1,7 +1,12 @@
 package net.ucopy.drugcheck.model.manager;
 
+import com.db4o.ObjectContainer;
+import com.db4o.query.Predicate;
+
+import net.ucopy.drugcheck.Db4oHelper;
 import net.ucopy.drugcheck.entity.SearchAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +33,19 @@ public enum SearchActionManager {
      * @return 以 str 为前缀的所有barcode
      */
     public List<String> getSearchBarCode(String str) {
-        return null;
+
+        List <SearchAction> searchActions = getSearchActions(str);
+
+        List<String> res = new ArrayList<>();
+
+        if (searchActions != null)
+        {
+            for (SearchAction searchAction:searchActions ){
+                res.add(searchAction.getBarCode());
+            }
+        }
+
+        return res;
     }
 
     /**
@@ -37,8 +54,23 @@ public enum SearchActionManager {
      * @param str
      * @return
      */
-    public List<SearchAction> getSearchActions(String str) {
-        return null;
+    public List<SearchAction> getSearchActions(final String str) {
+
+        ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
+
+        if (objectContainer == null){
+            return null;
+        }
+
+        List <SearchAction> searchActions = objectContainer.query(new Predicate<SearchAction>() {
+            public boolean match(SearchAction searchAction) {
+                return searchAction.getBarCode().contains(str);
+            }
+        });
+
+        Db4oHelper.getInstance.releaseConnection(objectContainer);
+
+        return searchActions;
     }
 
     /**
@@ -48,7 +80,16 @@ public enum SearchActionManager {
      */
     public void saveSearchAction(SearchAction searchAction) {
 
-    }
+        ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
 
+        if (objectContainer == null || searchAction == null){
+            return ;
+        }
+
+        objectContainer.store(searchAction);
+
+        Db4oHelper.getInstance.releaseConnection(objectContainer);
+
+    }
 
 }
