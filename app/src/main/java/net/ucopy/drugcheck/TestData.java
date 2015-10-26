@@ -1,47 +1,119 @@
-//package net.ucopy.drugcheck;
-//
-//import java.util.ArrayList;
-//
-//import net.ucopy.drugcheck.entity.Infos;
-//import net.ucopy.drugcheck.tools.KeyValueEntry;
-//
-//public class TestData {
-//
-//    public ArrayList<Infos> tipsList;
-//
-//    public ArrayList<Infos> infoList;
-//
-//
-//    public TestData() {
-//        if (tipsList == null || infoList == null) {
-//            tipsList = new ArrayList<Infos>();
-//            infoList = new ArrayList<Infos>();
-//            tipsList.add(new Infos("1.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//            tipsList.add(new Infos("2.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//
-//
-//            infoList.add(new Infos("1.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//            infoList.add(new Infos("2.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        }
-//    }
-//
-//    public TestData getMoreData() {
-//
-//
-//        tipsList.add(new Infos("3.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        tipsList.add(new Infos("4.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("3.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("4.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        tipsList.add(new Infos("3.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        tipsList.add(new Infos("4.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("3.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("4.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        tipsList.add(new Infos("3.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        tipsList.add(new Infos("4.什么时候吃药做好", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("3.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        infoList.add(new Infos("4.阿里医药再发力", "究竟什么时候吃药最合适呢！...", "http://url"));
-//        return this;
-//    }
-//
-//
-//}
+package net.ucopy.drugcheck;
+
+
+import android.content.Context;
+
+import net.ucopy.drugcheck.entity.SearchAction;
+import net.ucopy.drugcheck.model.manager.SearchActionManager;
+import net.ucopy.drugcheck.tools.ViewUtil;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
+
+import dalvik.system.DexClassLoader;
+
+public class TestData {
+
+    public static void addSearchAction() {
+
+        List<SearchAction> res = SearchActionManager.getInstance.getSearchActions();
+        if (res.size() == 0){
+            SearchAction searchAction = new SearchAction();
+            searchAction.setBarCode("12345678901234567890");
+            SearchActionManager.getInstance.saveSearchAction(searchAction);
+            searchAction = new SearchAction();
+            searchAction.setBarCode("qqqqqqqqqqqqqqqqqqqq");
+
+            SearchActionManager.getInstance.saveSearchAction(searchAction);
+        }
+
+    }
+
+
+
+
+        public static void testDynamicLoad( ) {
+
+            String aarPath = ApplicationController.getAppContext().getFilesDir().getAbsolutePath();
+            String aarName = "network-release.aar";
+
+            copyFilesFassets(ApplicationController.getAppContext(),aarName, aarPath+"/"+aarName);
+
+            DexClassLoader classLoader = new DexClassLoader(aarPath+"/"+aarName, aarPath,
+                    null, ApplicationController.getAppContext().getClassLoader());
+
+            File file = new File(aarPath+"/"+aarName);
+
+            if (file.exists()){
+                ViewUtil.toast(ApplicationController.getAppContext(),"file exists");
+
+            }
+
+
+            try {
+                Class mLoadClass = classLoader.loadClass("net.ucopy.drugcheck.network.Test");
+
+                Object object = mLoadClass.newInstance();
+
+                Method getMoney = mLoadClass.getMethod("TestAar", null);
+                getMoney.setAccessible(true);
+                String money = (String )getMoney.invoke(object, null);
+                ViewUtil.toast(ApplicationController.getAppContext(),money);
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    /**
+     *  从assets目录中复制整个文件夹内容
+     *  @param  context  Context 使用CopyFiles类的Activity
+     *  @param  oldPath  String  原文件路径  如：/aa
+     *  @param  newPath  String  复制后路径  如：xx:/bb/cc
+     */
+    public static  void copyFilesFassets(Context context,String oldPath,String newPath) {
+        try {
+            String fileNames[] = context.getAssets().list(oldPath);//获取assets目录下的所有文件及目录名
+            if (fileNames.length > 0) {//如果是目录
+                File file = new File(newPath);
+                file.mkdirs();//如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyFilesFassets(context,oldPath + "/" + fileName,newPath+"/"+fileName);
+                }
+            } else {//如果是文件
+                InputStream is = context.getAssets().open(oldPath);
+                FileOutputStream fos = new FileOutputStream(new File(newPath));
+                byte[] buffer = new byte[1024];
+                int byteCount=0;
+                while((byteCount=is.read(buffer))!=-1) {//循环从输入流读取 buffer字节
+                    fos.write(buffer, 0, byteCount);//将读取的输入流写入到输出流
+                }
+                fos.flush();//刷新缓冲区
+                is.close();
+                fos.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
+}

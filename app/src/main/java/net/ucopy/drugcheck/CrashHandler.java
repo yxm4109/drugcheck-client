@@ -3,6 +3,7 @@ package net.ucopy.drugcheck;
 import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static final String TAG = CrashHandler.class.getSimpleName();
@@ -82,6 +83,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 Looper.prepare();
 
                 ex.printStackTrace();
+                String err = "[" + ex.getMessage() + "]";
+                Toast.makeText(context, "程序出现异常." + err, Toast.LENGTH_LONG)
+                        .show();
 
                 Looper.loop();
             }

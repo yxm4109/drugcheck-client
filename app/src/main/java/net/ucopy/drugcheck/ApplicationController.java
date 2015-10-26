@@ -66,14 +66,33 @@ public class ApplicationController extends Application implements AMapLocationLi
 	public void onCreate() {
 		super.onCreate();
 
+//        /**
+//         * 测试数据
+//         */
+//        new Thread(){
+//
+//            @Override
+//            public void run(){
+//
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                TestData.addSearchAction();
+//            }
+//
+//        }.start();
+
         Bmob.initialize(this, "e8a02b540c61bf9a071e0a7969c34814");
 
         appInstance = this;
-
-		initLocation();
+        TestData.testDynamicLoad();
+		//initLocation();
 
 		CrashHandler crashHandler =CrashHandler.getInstance();
-		crashHandler.init(this);
+		crashHandler.init(getApplicationContext());
 
 	}
 

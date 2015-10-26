@@ -1,1 +1,1 @@
-include ':app', ':javalab', ':zxinglib'
+include ':app', ':javalab', ':zxinglib', ':network'

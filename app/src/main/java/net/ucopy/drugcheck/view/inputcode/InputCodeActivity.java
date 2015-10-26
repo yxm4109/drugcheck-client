@@ -13,16 +13,14 @@ package net.ucopy.drugcheck.view.inputcode;
 
 import android.content.Intent;
 import android.database.AbstractCursor;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import net.ucopy.drugcheck.R;
-import net.ucopy.drugcheck.presenter.inputcode.IInputcodePresenter;
+import net.ucopy.drugcheck.model.manager.SearchActionManager;
+import net.ucopy.drugcheck.presenter.inputcode.IInputCodePresenter;
 import net.ucopy.drugcheck.presenter.inputcode.InputCodePresenter;
 import net.ucopy.drugcheck.tools.ViewUtil;
 import net.ucopy.drugcheck.view.base.BaseActivity;
@@ -41,13 +39,12 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
 
     SearchView sv;
-    ListView lv;
 
-    Cursor cursor;
+    SearchCursor cursor = new SearchCursor();
 
     SimpleCursorAdapter adapter;
 
-    IInputcodePresenter inputcodePresenter;
+    IInputCodePresenter inputCodePresenter;
 
     private static final String SV_BARCODE_CLO = "tb_name";
 
@@ -56,9 +53,8 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        inputcodePresenter = new InputCodePresenter(this);
-        inputcodePresenter.onCreate();
-        cursor = new MatrixCursor(new String[]{SV_BARCODE_CLO});
+        inputCodePresenter = new InputCodePresenter(this);
+        inputCodePresenter.onCreate();
 
         sv = (SearchView) findViewById(R.id.sv_inputcode_searchview);
         sv.setIconifiedByDefault(false);
@@ -77,27 +73,20 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
             @Override
             public boolean onQueryTextChange(String str) {
-
+                cursor.flushData(SearchActionManager.getInstance.getSearchBarCode(str));
                 adapter.notifyDataSetChanged();
-                return false;
+                return true;
             }
 
             @Override
             public boolean onQueryTextSubmit(String str) {
 
                 if (str.length() != 20) {
-                    ViewUtil.toast(InputCodeActivity.this, "长度不正确");
+                    ViewUtil.toast(InputCodeActivity.this, "长度不正确,应该是20位的");
                     return false;
                 } else {
-                    Intent resultIntent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("result", str);
-                    resultIntent.putExtras(bundle);
-                    InputCodeActivity.this.setResult(RESULT_OK, resultIntent);
-                    finish();
+                    handlerResult(str);
                 }
-
-
                 return true;
             }
 
@@ -111,28 +100,29 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
             @Override
             public boolean onSuggestionClick(int position) {
-                cursor.moveToPosition(position);
-                String str = cursor.getString(cursor.getColumnIndex("tb_name"));
-
-                return false;
+                handlerResult(cursor.getData(position));
+                return true;
             }
         });
 
-    }
-
-
-    private Cursor getCursor(String str) {
-
-         return null;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        inputcodePresenter.onDestroy();
+        inputCodePresenter.onDestroy();
     }
 
+
+    private  void handlerResult(String str){
+        Intent resultIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("result", str);
+        resultIntent.putExtras(bundle);
+        InputCodeActivity.this.setResult(RESULT_OK, resultIntent);
+        finish();
+    }
 
     /**
      * 得到布局文件
@@ -155,11 +145,6 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
     }
 
-    @Override
-    public List<String> getHistroys() {
-        return null;
-    }
-
     public class SearchCursor extends AbstractCursor{
         List<String> data = new ArrayList<>();
 
@@ -168,6 +153,9 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
             data.addAll(newData);
         }
 
+        public String getData(int pos){
+            return data.get(pos);
+        }
 
         @Override
         public int getCount() {
@@ -176,7 +164,7 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
         @Override
         public String[] getColumnNames() {
-            return new String[0];
+            return new String[]{"_id",SV_BARCODE_CLO};
         }
 
         @Override

@@ -22,13 +22,6 @@ public enum Db4oHelper {
 
     private ObjectServer server;
 
-    {
-        server = Db4oClientServer.openServer(Db4oClientServer
-                .newServerConfiguration(), "database.yap", 0);
-        connectionQueue = new ConcurrentLinkedQueue<>();
-
-    }
-
     /**
      * get connection
      *
@@ -37,6 +30,15 @@ public enum Db4oHelper {
      * @throws InterruptedException
      */
     public synchronized ObjectContainer getConnection() {
+
+        if (server == null){
+
+            String filePath = ApplicationController.getAppContext().getFilesDir().getAbsolutePath();
+
+            server = Db4oClientServer.openServer(Db4oClientServer
+                    .newServerConfiguration(), filePath+"/database.yap", 0);
+            connectionQueue = new ConcurrentLinkedQueue<>();
+        }
 
         ObjectContainer objectContainer = connectionQueue.poll();
 

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Weh on 2015/10/18.
  */
-public class InputCodePresenter implements IInputcodePresenter{
+public class InputCodePresenter implements IInputCodePresenter{
 
     private IInputCodeActivity activity;
 

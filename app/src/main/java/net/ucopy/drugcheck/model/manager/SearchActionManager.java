@@ -87,6 +87,7 @@ public enum SearchActionManager {
         }
 
         objectContainer.store(searchAction);
+        objectContainer.commit();
 
         Db4oHelper.getInstance.releaseConnection(objectContainer);
 
