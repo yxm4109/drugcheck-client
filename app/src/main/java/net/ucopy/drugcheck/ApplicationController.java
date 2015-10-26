@@ -65,8 +65,11 @@ public class ApplicationController extends Application implements AMapLocationLi
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
         Bmob.initialize(this, "e8a02b540c61bf9a071e0a7969c34814");
+
         appInstance = this;
+
 		initLocation();
 
 		CrashHandler crashHandler =CrashHandler.getInstance();
@@ -78,11 +81,7 @@ public class ApplicationController extends Application implements AMapLocationLi
         return appInstance;
     }
 
-	// /********************************************************************************************///
-	//
-	// / Locatin位置信息相关 ///
-	//
-	// /********************************************************************************************///
+
 	private LocationManagerProxy mLocationManagerProxy;
 
 	private void initLocation() {

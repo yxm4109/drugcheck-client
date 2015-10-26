@@ -14,6 +14,7 @@ package net.ucopy.drugcheck.view.inputcode;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ import net.ucopy.drugcheck.presenter.inputcode.InputCodePresenter;
 import net.ucopy.drugcheck.tools.ViewUtil;
 import net.ucopy.drugcheck.view.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -71,7 +73,8 @@ public class InputCodeActivity extends BaseActivity implements  IInputCodeActivi
 
 
 //        sv.setSuggestionsAdapter(adapter);
-
+        MatrixCursor cursor2=new MatrixCursor(new String[] { "tb_name" });
+        cursor2.addRow(new ArrayList<Object>());
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override

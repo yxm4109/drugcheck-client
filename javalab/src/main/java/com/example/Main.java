@@ -4,28 +4,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String filePath="D:/workspace/android_workspace/AuthCodeProvider/src/testdata/2.jpg";
+        ConcurrentLinkedQueue<Object> connectionQueue = new ConcurrentLinkedQueue<>();
 
-        Socket socket = new Socket();
-        try {
-            socket.connect(new InetSocketAddress("127.0.0.1",8889));
-            OutputStream outputStream =socket.getOutputStream();
+        connectionQueue.offer(new Object());
 
-            byte[] bytes = getContent(filePath);
-            outputStream.write(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Object object1 = connectionQueue.poll();
+        Object object2 = connectionQueue.poll();
+
+        System.out.println(object1);
+        System.out.println(object2);
 
     }
 
