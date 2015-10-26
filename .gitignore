@@ -1,4 +1,4 @@
 /build
 local.properties
-.idea
+.idea/*
 infer-out
