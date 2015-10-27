@@ -35,7 +35,7 @@ task makeJar(type: Copy) {
     from('build/intermediates/bundles/release/')
     into('dist/')
     include('classes.jar')
-    rename ('classes.jar', 'android-validation-komensky.jar')
+    rename ('classes.jar', 'nerwork.jar')
 }
 
 makeJar.dependsOn(clearJar, build)

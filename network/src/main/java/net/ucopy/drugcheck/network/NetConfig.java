@@ -11,6 +11,11 @@ public class NetConfig {
     public static final String ServerHostAddress = "http://192.168.1.106:8002";
 
     /**
+     * 自己的服务器地址
+     */
+    public static final int ServerHostPort = 8002;
+
+    /**
      * 药品监管局地址
      */
     public static String sBaseDomain = "http://sp.drugadmin.com";
