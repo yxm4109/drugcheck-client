@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import net.ucopy.drugcheck.R;
 import net.ucopy.drugcheck.model.manager.DebugManager;
-import net.ucopy.drugcheck.model.communicate.DoSearch;
 import net.ucopy.drugcheck.view.inputcode.InputCodeActivity;
 import net.ucopy.drugcheck.view.base.BaseActivity;
 import net.ucopy.drugcheck.zxinglib.view.MipcaActivityCapture;
@@ -33,7 +32,7 @@ public class MainActivity extends BaseActivity {
     private Vibrator mVibrator;
 
     // 核心处理逻辑类
-    private DoSearch mDoSearch = null;
+//    private DoSearch mDoSearch = null;
 
     // 扫描按钮
     private Button mBtnStartScan = null;
@@ -98,8 +97,8 @@ public class MainActivity extends BaseActivity {
                     Bundle bundle = data.getExtras();
                     String code = bundle.getString("result");
                     DebugManager.i(TAG,"code:"+code);
-                    mDoSearch = new DoSearch(this, code);
-                    mDoSearch.run();
+//                    mDoSearch = new DoSearch(this, code);
+//                    mDoSearch.run();
 
                     break;
             }

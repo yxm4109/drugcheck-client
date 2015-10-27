@@ -39,8 +39,8 @@ public class TestData {
         public static void testDynamicLoad( ) {
 
             String aarPath = ApplicationController.getAppContext().getFilesDir().getAbsolutePath();
-            String aarName = "network-release.aar";
-
+//            String aarName = "network-release.aar";
+            String aarName = "dynamic.jar";
             copyFilesFassets(ApplicationController.getAppContext(),aarName, aarPath+"/"+aarName);
 
             DexClassLoader classLoader = new DexClassLoader(aarPath+"/"+aarName, aarPath,
@@ -55,26 +55,24 @@ public class TestData {
 
 
             try {
-                Class mLoadClass = classLoader.loadClass("net.ucopy.drugcheck.network.Test");
+                Class mLoadClass = classLoader.loadClass("net.ucopy.drugcheck.network.GetDrugInfoNetWork");
 
                 Object object = mLoadClass.newInstance();
 
-                Method getMoney = mLoadClass.getMethod("TestAar", null);
+                Method getMoney = mLoadClass.getMethod("getDrugInfoByBarCode", String.class);
                 getMoney.setAccessible(true);
-                String money = (String )getMoney.invoke(object, null);
+                String money = getMoney.invoke(object,"hello").toString();
                 ViewUtil.toast(ApplicationController.getAppContext(),money);
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SecurityException e) {
                 e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
