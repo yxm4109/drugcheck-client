@@ -109,15 +109,23 @@ public class GetDrugInfoNetWork implements INetWork {
                 baos.write(buffer, 0, ch);
             }
             baos.flush();
-
+            baos.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String res = br.readLine();
+            br.close();
 
-            return br.readLine();
+            return res;
 
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
 
