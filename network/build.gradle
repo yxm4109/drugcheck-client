@@ -35,7 +35,8 @@ task makeJar(type: Copy) {
     from('build/intermediates/bundles/release/')
     into('dist/')
     include('classes.jar')
-    rename ('classes.jar', 'nerwork.jar')
+    rename ('classes.jar', 'network.jar')
 }
+
 
 makeJar.dependsOn(clearJar, build)

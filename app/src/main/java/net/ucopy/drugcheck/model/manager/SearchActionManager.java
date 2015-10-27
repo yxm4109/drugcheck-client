@@ -78,7 +78,7 @@ public enum SearchActionManager {
      *
      * @param searchAction
      */
-    public void saveSearchAction(SearchAction searchAction) {
+    public synchronized void saveSearchAction(SearchAction searchAction) {
 
         ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
 

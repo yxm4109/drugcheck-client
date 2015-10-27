@@ -1,4 +1,4 @@
-package net.ucopy.drugcheck.network;
+package network;
 
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
