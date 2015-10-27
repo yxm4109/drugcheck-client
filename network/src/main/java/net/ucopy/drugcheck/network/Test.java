@@ -15,4 +15,10 @@ public class Test {
         return "this is form aar";
     }
 
+
+
+    /**
+     * 测试用
+     */
+    public static final String TEST_DRUG_CODE = "81056020290075626833";
 }
