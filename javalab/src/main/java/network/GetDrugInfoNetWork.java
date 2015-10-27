@@ -9,6 +9,8 @@ import com.squareup.okhttp.Response;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +21,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by meituan on 15/10/27.
@@ -55,7 +58,27 @@ public class GetDrugInfoNetWork implements INetWork {
                     /**
                      * 识别验证码
                      */
-                    String captcha = getCaptcha(response.body().byteStream());
+
+                    InputStream inputStream = response.body().byteStream();
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(new File("/Users/yanwei/image.jpg"));
+
+                    byte[] bytes = new byte[1024];
+
+                    int ch=0;
+
+                    while ((ch=inputStream.read(bytes))!=-1){
+                        fileOutputStream.write(bytes,0,ch);
+                    }
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+
+                    String captcha ;//= getCaptcha(inputStream);
+                    Scanner scanner = new Scanner(System.in);
+
+                    captcha = scanner.nextLine();
+
+
                     if (captcha != null) {
 
                         /**
@@ -109,6 +132,8 @@ public class GetDrugInfoNetWork implements INetWork {
                 baos.write(buffer, 0, ch);
             }
             baos.flush();
+            baos.close();
+            is.close();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 

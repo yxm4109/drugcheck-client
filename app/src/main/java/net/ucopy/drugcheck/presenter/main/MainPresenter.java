@@ -1,4 +1,4 @@
-package net.ucopy.drugcheck.presenter;
+package net.ucopy.drugcheck.presenter.main;
 
 import net.ucopy.drugcheck.entity.SearchAction;
 import net.ucopy.drugcheck.view.mainactivity.MainActivity;
