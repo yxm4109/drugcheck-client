@@ -1,17 +1,15 @@
 package net.ucopy.drugcheck.entity;
 
-import cn.bmob.v3.BmobObject;
-
 /**
  * Created by Weh on 15/10/19.
  */
-public class SearchAction extends BmobObject{
+public class SearchAction extends UCopyObject {
 
-    String date;//时间
-    String barCode;//电子监管码
-    String poiName;//poi名称，位置信息的一种
-    String cityName;//城市名称
-    String imei;//imei编号
+    String date = "";//时间
+    String barCode = "";//电子监管码
+    String poiName = "";//poi名称，位置信息的一种
+    String cityName = "";//城市名称
+    String imei = "";//imei编号
 
     public String getPoiName() {
         return poiName;

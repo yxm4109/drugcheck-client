@@ -9,17 +9,17 @@ import android.widget.Toast;
  */
 public class ViewUtil {
 
-    public static void toast(Context context,String content){
-        Toast.makeText(context,content,Toast.LENGTH_SHORT).show();
+    public static void toast(Context context, String content) {
+        Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showProcessDialog(Context context, ProgressDialog m_pDialog, String title, String msg) {
-        m_pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        m_pDialog.setTitle(title);
-        m_pDialog.setMessage(msg);
-        m_pDialog.setIndeterminate(false);
-        m_pDialog.setCancelable(true);
-        m_pDialog.show();
+    public static void showProcessDialog(ProgressDialog dialog, String title, String msg) {
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setTitle(title);
+        dialog.setMessage(msg);
+        dialog.setIndeterminate(false);
+        dialog.setCancelable(true);
+        dialog.show();
 
     }
 

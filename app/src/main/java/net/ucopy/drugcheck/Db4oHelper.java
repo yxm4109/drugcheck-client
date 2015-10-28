@@ -31,12 +31,12 @@ public enum Db4oHelper {
      */
     public synchronized ObjectContainer getConnection() {
 
-        if (server == null){
+        if (server == null) {
 
             String filePath = ApplicationController.getAppContext().getFilesDir().getAbsolutePath();
 
             server = Db4oClientServer.openServer(Db4oClientServer
-                    .newServerConfiguration(), filePath+"/database.yap", 0);
+                    .newServerConfiguration(), filePath + "/database.yap", 0);
             connectionQueue = new ConcurrentLinkedQueue<>();
         }
 
@@ -63,6 +63,17 @@ public enum Db4oHelper {
 
     void close() {
         server.close();
+    }
+
+
+    public static <T> void save(T t) {
+
+        ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
+
+        objectContainer.store(t);
+
+        Db4oHelper.getInstance.releaseConnection(objectContainer);
+
     }
 
 }

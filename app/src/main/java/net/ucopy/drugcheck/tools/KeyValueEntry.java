@@ -3,12 +3,12 @@ package net.ucopy.drugcheck.tools;
 import java.io.Serializable;
 import java.util.Map.Entry;
 
-public final class KeyValueEntry<K,V> implements Entry<K, V> , Serializable{
+public final class KeyValueEntry<K, V> implements Entry<K, V>, Serializable {
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = 1L;
-	private final K key;
+    private final K key;
     private V value;
 
     public KeyValueEntry(K key, V value) {
@@ -32,6 +32,6 @@ public final class KeyValueEntry<K,V> implements Entry<K, V> , Serializable{
         this.value = value;
         return old;
     }
-    
-    
+
+
 }

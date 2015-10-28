@@ -30,10 +30,10 @@ import java.util.List;
 
 
 /**
- * @author yw     E-mail:yxm4109@foxmail.com 
- * @date 2015-5-24 下午3:04:40 
+ * @author yw     E-mail:yxm4109@foxmail.com
  * @version 1.0
- * 说  明： 
+ *          说  明：
+ * @date 2015-5-24 下午3:04:40
  */
 public class InputCodeActivity extends BaseActivity implements IInputCodeActivity {
 
@@ -54,7 +54,7 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
         super.onCreate(savedInstanceState);
 
         inputCodePresenter = new InputCodePresenter(this);
-        inputCodePresenter.onCreate();
+        inputCodePresenter.onCreate(this);
 
         sv = (SearchView) findViewById(R.id.sv_inputcode_searchview);
         sv.setIconifiedByDefault(false);
@@ -115,7 +115,7 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
     }
 
 
-    private  void handlerResult(String str){
+    private void handlerResult(String str) {
         Intent resultIntent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putString("result", str);
@@ -145,15 +145,15 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
     }
 
-    public class SearchCursor extends AbstractCursor{
+    public class SearchCursor extends AbstractCursor {
         List<String> data = new ArrayList<>();
 
-        public void flushData(List<String> newData){
+        public void flushData(List<String> newData) {
             data.clear();
             data.addAll(newData);
         }
 
-        public String getData(int pos){
+        public String getData(int pos) {
             return data.get(pos);
         }
 
@@ -164,7 +164,7 @@ public class InputCodeActivity extends BaseActivity implements IInputCodeActivit
 
         @Override
         public String[] getColumnNames() {
-            return new String[]{"_id",SV_BARCODE_CLO};
+            return new String[]{"_id", SV_BARCODE_CLO};
         }
 
         @Override

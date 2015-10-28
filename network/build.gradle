@@ -33,12 +33,15 @@ dependencies {
 task clearJar(type: Delete) {
     delete 'dist/android-validation-komensky.jar'
 }
+
 task makeJar(type: Copy) {
     from('build/intermediates/bundles/release/')
-    into('dist/')
+    into('../dist/')
     include('classes.jar')
     rename ('classes.jar', 'network.jar')
 }
 
 
 makeJar.dependsOn(clearJar, build)
+
+

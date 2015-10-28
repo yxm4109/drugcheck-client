@@ -1,16 +1,13 @@
 package net.ucopy.drugcheck.entity;
 
-import java.util.ArrayList;
-import java.util.Map.Entry;
+import java.io.Serializable;
 
-import cn.bmob.v3.BmobObject;
-
-public class DrugInfo extends BmobObject {
+public class DrugInfo extends UCopyObject implements Serializable {
 
     public String barCode;//药品的电子监管码
 
-	public String picUrl;// 图片地址
-	public String status;// 目前流向
+    public String picUrl;// 图片地址
+    public String status;// 目前流向
 
     public String commName;// 通用名
     public String dosageForm;// 剂型
@@ -23,7 +20,7 @@ public class DrugInfo extends BmobObject {
     public String approvalNumber;// 批准文号
 
 
-    public void setBarCode(String barCode){
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
@@ -118,9 +115,6 @@ public class DrugInfo extends BmobObject {
     public String getApprovalNumber() {
         return approvalNumber;
     }
-
-
-	
 
 
 }

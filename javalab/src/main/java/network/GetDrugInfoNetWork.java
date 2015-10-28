@@ -124,15 +124,15 @@ public class GetDrugInfoNetWork implements INetWork {
             socket.setTcpNoDelay(true);
             socket.connect(new InetSocketAddress(NetConfig.ServerHostAddress, NetConfig.ServerHostPort));
 
-            OutputStream baos = socket.getOutputStream();
+            OutputStream os = socket.getOutputStream();
 
             byte[] buffer = new byte[1024];
             int ch;
             while ((ch = is.read(buffer)) != -1) {
-                baos.write(buffer, 0, ch);
+                os.write(buffer, 0, ch);
             }
-            baos.flush();
-            baos.close();
+            os.flush();
+            os.close();
             is.close();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -147,6 +147,5 @@ public class GetDrugInfoNetWork implements INetWork {
         return null;
 
     }
-
 
 }

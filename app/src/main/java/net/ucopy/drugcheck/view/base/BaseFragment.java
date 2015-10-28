@@ -42,14 +42,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /**
      * 设置监听器
      */
-    protected void setListener(){
+    protected void setListener() {
 
     }
 
     /**
-      初始化数据
+     * 初始化数据
      */
-    protected void initData(){
+    protected void initData() {
 
     }
 

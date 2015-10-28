@@ -86,7 +86,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 String err = "[" + ex.getMessage() + "]";
                 Toast.makeText(context, "程序出现异常." + err, Toast.LENGTH_LONG)
                         .show();
-
+                System.out.println("程序出现异常." + err);
                 Looper.loop();
             }
 

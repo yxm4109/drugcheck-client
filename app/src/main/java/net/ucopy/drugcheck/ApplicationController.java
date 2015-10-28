@@ -30,11 +30,11 @@
 //                  不见满街漂亮妹，哪个归得程序员？ 
 
 /**
- * Application 
+ * Application
+ *
  * @author yw (yxm4109[at]foxmail[dot]com)
- * 
  */
- 
+
 package net.ucopy.drugcheck;
 
 import android.app.Application;
@@ -55,25 +55,25 @@ import cn.bmob.v3.Bmob;
 
 public class ApplicationController extends Application implements AMapLocationListener, OnClickListener {
 
-	/**
-	 * Log or request TAG
-	 */
-	public static final String TAG = ApplicationController.class.getSimpleName();
+    /**
+     * Log or request TAG
+     */
+    public static final String TAG = ApplicationController.class.getSimpleName();
 
     private static ApplicationController appInstance;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-        CrashHandler crashHandler =CrashHandler.getInstance();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
         /**
          * 测试数据
          */
-        new Thread(){
+        new Thread() {
 
             @Override
-            public void run(){
+            public void run() {
 
                 try {
                     Thread.sleep(2000);
@@ -90,63 +90,62 @@ public class ApplicationController extends Application implements AMapLocationLi
 
         appInstance = this;
         TestData.testDynamicLoad();
-		initLocation();
+//		initLocation();
 
 
+    }
 
-	}
-
-    public static ApplicationController getAppContext(){
+    public static ApplicationController getAppContext() {
         return appInstance;
     }
 
 
-	private LocationManagerProxy mLocationManagerProxy;
+    private LocationManagerProxy mLocationManagerProxy;
 
-	private void initLocation() {
-		// 加载上次缓存的位置信息
-		DCLocationManager.getInstance.getLastLocation();
+    private void initLocation() {
+        // 加载上次缓存的位置信息
+        DCLocationManager.getInstance.getLastLocation();
 
-		// 初始化定位，采用混合定位
-		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
-		mLocationManagerProxy.setGpsEnable(true);
-		mLocationManagerProxy.requestLocationData(LocationProviderProxy.AMapNetwork, 60 * 1000, 5, this);
-	}
+        // 初始化定位，采用混合定位
+        mLocationManagerProxy = LocationManagerProxy.getInstance(this);
+        mLocationManagerProxy.setGpsEnable(true);
+        mLocationManagerProxy.requestLocationData(LocationProviderProxy.AMapNetwork, 60 * 1000, 5, this);
+    }
 
-	@Override
-	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onLocationChanged(Location location) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onProviderEnabled(String provider) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onProviderDisabled(String provider) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onLocationChanged(AMapLocation amapLocation) {
+    @Override
+    public void onLocationChanged(AMapLocation amapLocation) {
 
-		if (amapLocation != null && amapLocation.getAMapException().getErrorCode() == 0) {
+        if (amapLocation != null && amapLocation.getAMapException().getErrorCode() == 0) {
 //			// 定位成功回调信息，设置相关消息
 //			DCLocationModel.setLatitude(amapLocation.getLatitude() + "");
 //			DCLocationModel.setLongtude(amapLocation.getLongitude() + "");
@@ -165,12 +164,12 @@ public class ApplicationController extends Application implements AMapLocationLi
 //			DCLocationModel.setPoiName(amapLocation.getPoiName());
 //			DCLocationModel.setCityCode(amapLocation.getCityCode());
 //			DCLocationModel.setAreaCode(amapLocation.getAdCode());
-			// 保存本次获取到的位置信息
-			DCLocationManager.getInstance.setLastLocation(amapLocation.getCityCode(), amapLocation.getPoiName());
-		} else {
-			Log.e("AmapErr", "Location ERR:" + amapLocation.getAMapException().getErrorCode());
-		}
-	}
+            // 保存本次获取到的位置信息
+            DCLocationManager.getInstance.setLastLocation(amapLocation.getCityCode(), amapLocation.getPoiName());
+        } else {
+            Log.e("AmapErr", "Location ERR:" + amapLocation.getAMapException().getErrorCode());
+        }
+    }
 
 
 }

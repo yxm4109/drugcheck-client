@@ -69,9 +69,9 @@ public class SearchListAdapter extends BaseAdapter {
 
         holder.title.setText(datas.get(position).getBarCode());
 
-        holder.title.setText( datas.get(position).getBarCode());
+        holder.title.setText(datas.get(position).getBarCode());
 
-        holder.title.setText( datas.get(position).getBarCode());
+        holder.title.setText(datas.get(position).getBarCode());
 
 
         return view;

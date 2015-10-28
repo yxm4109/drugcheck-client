@@ -1,4 +1,4 @@
-package net.ucopy.drugcheck.model.manager;
+package net.ucopy.drugcheck.tools;
 
 import android.util.Log;
 

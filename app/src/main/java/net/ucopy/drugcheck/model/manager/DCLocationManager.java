@@ -20,17 +20,16 @@ public enum DCLocationManager {
 
     public DCLocationModel getLastLocation() {
         dcLocationModel.setCity(sp.getString("cityCode", null));
-        dcLocationModel.setPoiName( sp.getString("poiName", null));
+        dcLocationModel.setPoiName(sp.getString("poiName", null));
         return dcLocationModel;
     }
 
-    public void setLastLocation(String cityCode,String poiName) {
+    public void setLastLocation(String cityCode, String poiName) {
         SharedPreferences.Editor e = sp.edit();
         e.putString("cityCode", cityCode);
         e.putString("poiName", poiName);
         e.commit();
     }
-
 
 
 }

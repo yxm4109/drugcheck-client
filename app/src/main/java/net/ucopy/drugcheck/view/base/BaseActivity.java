@@ -59,7 +59,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * activity之间的跳转
-     * @param clazz 目标activity
+     *
+     * @param clazz    目标activity
      * @param isfinish 是否关闭
      */
     protected void jumpAct(Class clazz, boolean isfinish, int flags) {
@@ -73,30 +74,30 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * Fragment之间的切换
+     *
      * @param from 当前
-     * @param to 目标
+     * @param to   目标
      * @param id
      * @param tag
      */
-    protected void jumpFrm(Fragment from,Fragment to,int id,String tag){
-        if (to==null){
+    protected void jumpFrm(Fragment from, Fragment to, int id, String tag) {
+        if (to == null) {
             return;
         }
-        FragmentManager manager=getSupportFragmentManager();
-        FragmentTransaction transaction=manager.beginTransaction();
-        if (from==null){
-            transaction.add(id,to,tag);
-        }else{
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if (from == null) {
+            transaction.add(id, to, tag);
+        } else {
             transaction.hide(from);
-            if (to.isAdded()){
-                 transaction.show(to);
-            }else{
-                transaction.add(id,to,tag);
+            if (to.isAdded()) {
+                transaction.show(to);
+            } else {
+                transaction.add(id, to, tag);
             }
         }
         transaction.commitAllowingStateLoss();
     }
-
 
 
 }

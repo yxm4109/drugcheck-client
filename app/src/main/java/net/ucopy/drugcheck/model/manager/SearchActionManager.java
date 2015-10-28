@@ -34,13 +34,12 @@ public enum SearchActionManager {
      */
     public List<String> getSearchBarCode(String str) {
 
-        List <SearchAction> searchActions = getSearchActions(str);
+        List<SearchAction> searchActions = getSearchActions(str);
 
         List<String> res = new ArrayList<>();
 
-        if (searchActions != null)
-        {
-            for (SearchAction searchAction:searchActions ){
+        if (searchActions != null) {
+            for (SearchAction searchAction : searchActions) {
                 res.add(searchAction.getBarCode());
             }
         }
@@ -58,11 +57,11 @@ public enum SearchActionManager {
 
         ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
 
-        if (objectContainer == null){
+        if (objectContainer == null) {
             return null;
         }
 
-        List <SearchAction> searchActions = objectContainer.query(new Predicate<SearchAction>() {
+        List<SearchAction> searchActions = objectContainer.query(new Predicate<SearchAction>() {
             public boolean match(SearchAction searchAction) {
                 return searchAction.getBarCode().contains(str);
             }
@@ -79,15 +78,12 @@ public enum SearchActionManager {
      * @param searchAction
      */
     public synchronized void saveSearchAction(SearchAction searchAction) {
-
         ObjectContainer objectContainer = Db4oHelper.getInstance.getConnection();
 
-        if (objectContainer == null || searchAction == null){
-            return ;
+        if (objectContainer == null || searchAction == null) {
+            return;
         }
-
         objectContainer.store(searchAction);
-        objectContainer.commit();
 
         Db4oHelper.getInstance.releaseConnection(objectContainer);
 
